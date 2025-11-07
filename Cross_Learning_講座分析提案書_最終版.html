@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cross Learning 講座ポートフォリオ分析報告書【最終版】</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ヘッダー */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .update-badge {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* ナビゲーション */
+        nav {
+            background: #2c3e50;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 18px 25px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            background: #34495e;
+            transform: translateY(-2px);
+        }
+
+        /* セクション */
+        section {
+            padding: 60px 40px;
+            border-bottom: 1px solid #eee;
+        }
+
+        section:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        section h2 {
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            color: #667eea;
+            border-left: 6px solid #667eea;
+            padding-left: 20px;
+        }
+
+        section h3 {
+            font-size: 1.8em;
+            margin: 40px 0 20px;
+            color: #764ba2;
+            border-bottom: 2px solid #764ba2;
+            padding-bottom: 10px;
+        }
+
+        section h4 {
+            font-size: 1.4em;
+            margin: 30px 0 15px;
+            color: #555;
+        }
+
+        /* テーブル */
+        .table-container {
+            overflow-x: auto;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        table th {
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        table tbody tr:hover {
+            background: #f5f7fa;
+            transition: all 0.3s;
+        }
+
+        /* カード */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border-left: 5px solid #667eea;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* 統計ボックス */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        .stat-box:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-box .number {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-box .label {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .stat-box.new {
+            background: linear-gradient(135deg, #f39c12 0%, #e74c3c 100%);
+        }
+
+        .stat-box.excellent {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        }
+
+        /* バッジ */
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin: 5px;
+        }
+
+        .badge-high {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .badge-medium {
+            background: #f39c12;
+            color: white;
+        }
+
+        .badge-low {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .badge-excellent {
+            background: #27ae60;
+            color: white;
+        }
+
+        .badge-new {
+            background: #e74c3c;
+            color: white;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        /* アラートボックス */
+        .alert {
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+            border-left: 5px solid;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border-color: #f39c12;
+            color: #856404;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            border-color: #e74c3c;
+            color: #721c24;
+        }
+
+        /* 新規セクション */
+        .new-courses-section {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe6cc 100%);
+            border: 3px solid #f39c12;
+        }
+
+        /* プログレスバー */
+        .progress-container {
+            margin: 20px 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #ecf0f1;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: width 1s ease;
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            section {
+                padding: 40px 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li a {
+                padding: 15px 20px;
+            }
+        }
+
+        /* プリント用 */
+        @media print {
+            body {
+                background: white;
+            }
+
+            nav {
+                display: none;
+            }
+
+            section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header>
+            <h1>📊 Cross Learning講座ポートフォリオ<br>全体分析と戦略的提案【最終版】</h1>
+            <p>統合CSVデータに基づく精密分析 + 拡充計画110講座</p>
+            <div class="update-badge">🔥 2025/11/07 統合データ完全版 + 精密分析</div>
+        </header>
+
+        <!-- ナビゲーション -->
+        <nav>
+            <ul>
+                <li><a href="#section0">エグゼクティブサマリー</a></li>
+                <li><a href="#section1">現状分析</a></li>
+                <li><a href="#section2">拡充計画</a></li>
+                <li><a href="#section3">ギャップ分析</a></li>
+                <li><a href="#section4">戦略的提言</a></li>
+            </ul>
+        </nav>
+
+        <!-- 第0部：エグゼクティブサマリー -->
+        <section id="section0" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+            <h2>🎯 エグゼクティブサマリー</h2>
+
+            <div class="stats-grid">
+                <div class="stat-box excellent">
+                    <div class="number">338</div>
+                    <div class="label">現行講座数</div>
+                </div>
+                <div class="stat-box new">
+                    <div class="number">134</div>
+                    <div class="label">Phase 1追加（〜2026/3）</div>
+                </div>
+                <div class="stat-box excellent">
+                    <div class="number">472</div>
+                    <div class="label">2026年3月末目標</div>
+                </div>
+                <div class="stat-box new">
+                    <div class="number">616</div>
+                    <div class="label">2026年9月末目標</div>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>✅ 統合CSVデータ分析完了</strong><br>
+                338講座すべてを統合・分析し、カテゴリ別・言語別・詳細度別の完全な統計データを取得しました。<br>
+                このデータに基づき、より精密な戦略的提案を行います。
+            </div>
+
+            <h3>重要な発見</h3>
+            <div class="card-grid">
+                <div class="card" style="border-left-color: #27ae60;">
+                    <h4>✅ 強み</h4>
+                    <p>
+                        • 製造業向け講座が充実（58講座、17.2%）<br>
+                        • IT/PCスキル講座が豊富（89講座、26.3%）<br>
+                        • 多言語対応が既に21.3%（72講座、物流含む）<br>
+                        • 試験対策講座が充実（40講座、11.8%）<br>
+                        • 4言語対応済み（英・ポ・ベ・中）
+                    </p>
+                </div>
+                <div class="card" style="border-left-color: #e74c3c;">
+                    <h4>⚠️ 弱み（今回の拡充で解決）</h4>
+                    <p>
+                        • 外国人向けスタートアップ教育：0講座 → <strong>30講座追加（日本語6+多言語24）</strong><br>
+                        • 多言語対応率：21.3% → <strong>42.4%に倍増</strong><br>
+                        • インドネシア語等：0講座 → <strong>各26講座追加</strong><br>
+                        • スタートアップ講座：<strong>4言語対応完了</strong>
+                    </p>
+                </div>
+                <div class="card" style="border-left-color: #f39c12;">
+                    <h4>💡 今後の課題（Phase 2・3で対応）</h4>
+                    <p>
+                        <strong>【3社競合分析から判明した不足領域】</strong><br>
+                        <strong>インソースから学ぶ：</strong><br>
+                        • DX・生成AI・RPA → <strong>Phase 2で16-21講座</strong><br>
+                        • マーケティング・企画・財務 → <strong>Phase 2で16-20講座</strong><br>
+                        • メンタルヘルス・管理職 → <strong>Phase 2で10-14講座</strong><br><br>
+                        <strong>派遣のミカタから学ぶ：</strong><br>
+                        • PC実務（VBA・Access） → <strong>Phase 2で8-10講座</strong><br>
+                        • 法務・労務・経理 → <strong>Phase 2で10-12講座</strong><br>
+                        • コールセンター → <strong>Phase 3で4-5講座</strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="alert alert-warning" style="margin-top: 30px;">
+                <strong>⚠️ 3社競合分析結果（インソース・派遣のミカタ・Cross Learning）</strong><br><br>
+                <strong>【Cross Learningの独占的優位性】</strong><br>
+                ✅ 多言語対応率42.4%（8言語） → 両社ともに未対応<br>
+                ✅ 外国人材スタートアップ教育30講座 → 業界初<br>
+                ✅ 製造・介護特化74講座 → 競合より深い専門性<br>
+                ✅ 完全オンライン特化（低コスト・高効率）<br><br>
+                <strong>【Phase 2・3で補完すべき領域（2社から学ぶ）】</strong><br>
+                ⚠️ <strong>インソースから：</strong>DX・生成AI・マーケティング・財務（42-55講座）<br>
+                ⚠️ <strong>派遣のミカタから：</strong>PC実務・法務・労務・コールセンター（22-27講座）<br><br>
+                → <strong>「垂直統合型（外国人材特化）× 水平展開（派遣実務）× 上位展開（DX・戦略）」の三位一体</strong><br>
+                → <strong>Phase 1（2026年3月末）で472講座、Phase 2・3（2026年9月末）で616講座体制</strong><br>
+                → 外国人派遣スタッフ市場の圧倒的No.1を確立
+            </div>
+        </section>
+
+        <!-- 第1部：現状分析（統合CSVベース） -->
+        <section id="section1">
+            <h2>📈 第1部：現状分析（統合CSVデータベース）</h2>
+
+            <h3>1-1. カテゴリ別講座分布（現行338講座）</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>カテゴリ</th>
+                            <th>講座数</th>
+                            <th>全体比</th>
+                            <th>評価</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>翻訳講座（多言語）</strong></td>
+                            <td>64講座</td>
+                            <td>18.9%</td>
+                            <td><span class="badge badge-excellent">良好</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>製造（ものづくり・品質管理）</strong></td>
+                            <td>58講座</td>
+                            <td>17.2%</td>
+                            <td><span class="badge badge-excellent">良好</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>ITスキル（Web・プログラミング）</strong></td>
+                            <td>49講座</td>
+                            <td>14.5%</td>
+                            <td><span class="badge badge-excellent">良好</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>PCスキル（Office系）</strong></td>
+                            <td>40講座</td>
+                            <td>11.8%</td>
+                            <td><span class="badge badge-excellent">充実</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>試験対策</strong></td>
+                            <td>40講座</td>
+                            <td>11.8%</td>
+                            <td><span class="badge badge-excellent">充実</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>介護福祉</strong></td>
+                            <td>16講座</td>
+                            <td>4.7%</td>
+                            <td><span class="badge badge-medium">標準</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>ビジネススキル</strong></td>
+                            <td>13講座</td>
+                            <td>3.8%</td>
+                            <td><span class="badge badge-medium">標準</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>ヒューマンスキル</strong></td>
+                            <td>10講座</td>
+                            <td>3.0%</td>
+                            <td><span class="badge badge-medium">標準</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>CADスキル</strong></td>
+                            <td>8講座</td>
+                            <td>2.4%</td>
+                            <td><span class="badge badge-medium">標準</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>物流</strong></td>
+                            <td>7講座</td>
+                            <td>2.1%</td>
+                            <td><span class="badge badge-medium">標準</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>リーダースキル</strong></td>
+                            <td>7講座</td>
+                            <td>2.1%</td>
+                            <td><span class="badge badge-medium">標準</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>その他</strong></td>
+                            <td>26講座</td>
+                            <td>7.7%</td>
+                            <td>-</td>
+                        </tr>
+                        <tr style="background: #f0f0f0; font-weight: bold;">
+                            <td>合計</td>
+                            <td>338講座</td>
+                            <td>100%</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>1-2. 多言語対応状況（現行）</h3>
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>多言語対応率</span>
+                    <span>21.3% (72/338講座)</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 21.3%;">21.3%</div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>言語</th>
+                            <th>講座数</th>
+                            <th>全体比</th>
+                            <th>主な内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>日本語のみ</strong></td>
+                            <td>274講座</td>
+                            <td>81.1%</td>
+                            <td>-</td>
+                        </tr>
+                        <tr style="background: #e8f5e9;">
+                            <td><strong>英語</strong></td>
+                            <td>18講座</td>
+                            <td>5.3%</td>
+                            <td>ヒューマンスキル、ものづくり、品質管理、リーダー、物流</td>
+                        </tr>
+                        <tr style="background: #e8f5e9;">
+                            <td><strong>ポルトガル語</strong></td>
+                            <td>18講座</td>
+                            <td>5.3%</td>
+                            <td>ヒューマンスキル、ものづくり、品質管理、リーダー、物流</td>
+                        </tr>
+                        <tr style="background: #e8f5e9;">
+                            <td><strong>ベトナム語</strong></td>
+                            <td>18講座</td>
+                            <td>5.3%</td>
+                            <td>ヒューマンスキル、ものづくり、品質管理、リーダー、<strong>物流含む</strong></td>
+                        </tr>
+                        <tr style="background: #e8f5e9;">
+                            <td><strong>中国語</strong></td>
+                            <td>18講座</td>
+                            <td>5.3%</td>
+                            <td>ヒューマンスキル、ものづくり、品質管理、リーダー、<strong>物流含む</strong></td>
+                        </tr>
+                        <tr style="background: #f0f0f0; font-weight: bold;">
+                            <td>多言語対応合計</td>
+                            <td>72講座</td>
+                            <td>21.3%</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ 課題：</strong>英語・ポルトガル語は各18講座、ベトナム語・中国語は物流含めて各18講座で対応済み。<br>
+                しかし、インドネシア語、スペイン語、タガログ語、ミャンマー語には<strong>未対応</strong>。
+            </div>
+
+            <h3>1-3. 詳細情報の充実度</h3>
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>詳細情報（訓練内容・効果記載）あり</span>
+                    <span>59.2% (200/338講座)</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 59.2%;">59.2%</div>
+                </div>
+            </div>
+
+            <p style="margin-top: 20px; font-size: 1.1em;">
+                <strong>詳細情報あり：</strong>200講座（細部訓練項目、期待される効果、到達レベル、キャリアアップ理由を記載）<br>
+                <strong>基本情報のみ：</strong>138講座（講座名、時間数のみ）
+            </p>
+        </section>
+
+        <!-- 第2部：拡充計画（134講座） -->
+        <section id="section2" class="new-courses-section">
+            <h2>🚀 第2部：拡充計画（134講座の詳細）</h2>
+
+            <div class="stats-grid">
+                <div class="stat-box new">
+                    <div class="number">30</div>
+                    <div class="label">スタートアップ講座（多言語含む）</div>
+                </div>
+                <div class="stat-box new">
+                    <div class="number">104</div>
+                    <div class="label">多言語翻訳講座</div>
+                </div>
+                <div class="stat-box new">
+                    <div class="number">4</div>
+                    <div class="label">新規対応言語</div>
+                </div>
+                <div class="stat-box new">
+                    <div class="number">8</div>
+                    <div class="label">拡充後対応言語数</div>
+                </div>
+            </div>
+
+            <h3>2-1. スタートアップ講座（外国人スタッフ向け）【NEW】</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>講座名</th>
+                            <th>カテゴリ</th>
+                            <th>ユニット</th>
+                            <th>主な学習内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #fff3cd;">
+                            <td>1</td>
+                            <td><strong>日本の職場でのNG行動</strong></td>
+                            <td>職場文化</td>
+                            <td>5</td>
+                            <td>休暇連絡、SNS、備品、曖昧な返事、身だしなみ</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td>2</td>
+                            <td><strong>安全第一と品質意識</strong></td>
+                            <td>安全衛生</td>
+                            <td>6</td>
+                            <td>5S、ホウレンソウ、身だしなみ、作業ルール</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td>3</td>
+                            <td><strong>災害時と工場内でのルール</strong></td>
+                            <td>安全衛生</td>
+                            <td>4</td>
+                            <td>地震・火災対応、PPE、点検、喫煙ルール</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td>4</td>
+                            <td><strong>入職前研修用「安全衛生」</strong></td>
+                            <td>法令遵守</td>
+                            <td>8</td>
+                            <td>労働安全衛生法、KYT、LOTO、指差呼称</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td>5</td>
+                            <td><strong>職場でのコミュニケーション</strong></td>
+                            <td>職場文化</td>
+                            <td>3</td>
+                            <td>挨拶、返事、敬称、ホウレンソウ</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td>6</td>
+                            <td><strong>日本での生活〜暮らしのルール〜</strong></td>
+                            <td>生活基盤</td>
+                            <td>7</td>
+                            <td>ゴミ、騒音、買い物、交通、病院、電車、マナー</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>🌐 スタートアップ講座の多言語展開</strong><br>
+                上記6講座は、以下4言語で展開します：<br>
+                • 英語版（6講座）<br>
+                • ポルトガル語版（6講座）<br>
+                • 中国語版（6講座）<br>
+                • ベトナム語版（6講座）<br><br>
+                <strong>合計：6講座 × 4言語 = 24講座追加</strong><br>
+                これにより、現行4言語でスタートアップ教育が完全に実施可能になります。
+            </div>
+
+            <h3>2-2. 多言語翻訳講座（104講座）【NEW】</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>言語</th>
+                            <th>講座数</th>
+                            <th>カテゴリ</th>
+                            <th>対象市場</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>インドネシア語</strong></td>
+                            <td>26講座</td>
+                            <td>ヒューマン(2) + ものづくり(12) + 品質(4) + リーダー(8)</td>
+                            <td>🇮🇩 製造業最大の外国人労働者層</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>スペイン語</strong></td>
+                            <td>26講座</td>
+                            <td>ヒューマン(2) + ものづくり(12) + 品質(4) + リーダー(8)</td>
+                            <td>🇪🇸🇲🇽🇦🇷 中南米・スペイン市場</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>タガログ語</strong></td>
+                            <td>26講座</td>
+                            <td>ヒューマン(2) + ものづくり(12) + 品質(4) + リーダー(8)</td>
+                            <td>🇵🇭 介護・製造・サービス業で増加中</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>ミャンマー語</strong></td>
+                            <td>26講座</td>
+                            <td>ヒューマン(2) + ものづくり(12) + 品質(4) + リーダー(8)</td>
+                            <td>🇲🇲 今後急増見込みの新興市場</td>
+                        </tr>
+                        <tr style="background: #f0f0f0; font-weight: bold;">
+                            <td>合計</td>
+                            <td>104講座</td>
+                            <td>4言語 × 26講座</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>2-3. 拡充後の多言語対応率</h3>
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>拡充前（現行）</span>
+                    <span>21.3%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 21.3%; background: #95a5a6;">21.3%</div>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>拡充後（予定）</span>
+                    <span>42.4%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 42.4%;">42.4%</div>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>✅ 多言語対応率が2倍に改善！</strong><br>
+                72講座（21.3%） → 200講座（42.4%）<br>
+                対応言語：4言語 → 8言語に拡大<br>
+                スタートアップ講座24講座（4言語）+ 既存講座翻訳104講座（4言語）
+            </div>
+        </section>
+
+        <!-- 第3部：ギャップ分析 -->
+        <section id="section3">
+            <h2>🔍 第3部：ギャップ分析（不足領域の特定）</h2>
+
+            <h3>3-1. 日本人向け講座の不足領域</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>領域</th>
+                            <th>現行</th>
+                            <th>必要</th>
+                            <th>ギャップ</th>
+                            <th>優先度</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #ffebee;">
+                            <td><strong>新入社員フォローアップ</strong></td>
+                            <td>0講座</td>
+                            <td>3-4講座</td>
+                            <td><span class="badge badge-high">致命的</span></td>
+                            <td><span class="badge badge-high">最優先</span></td>
+                        </tr>
+                        <tr style="background: #ffebee;">
+                            <td><strong>DX・データ分析・生成AI</strong></td>
+                            <td>0講座</td>
+                            <td>8-10講座</td>
+                            <td><span class="badge badge-high">致命的</span></td>
+                            <td><span class="badge badge-high">最優先</span></td>
+                        </tr>
+                        <tr style="background: #ffebee;">
+                            <td><strong>マーケティング・企画力</strong></td>
+                            <td>0講座</td>
+                            <td>5-6講座</td>
+                            <td><span class="badge badge-high">致命的</span></td>
+                            <td><span class="badge badge-high">最優先</span></td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>キャリア形成支援</strong></td>
+                            <td>1講座</td>
+                            <td>5-6講座</td>
+                            <td><span class="badge badge-medium">大</span></td>
+                            <td><span class="badge badge-medium">高</span></td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>管理職マネジメント</strong></td>
+                            <td>5講座</td>
+                            <td>10-12講座</td>
+                            <td><span class="badge badge-medium">中</span></td>
+                            <td><span class="badge badge-medium">高</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>AI・RPA活用</strong></td>
+                            <td>0講座</td>
+                            <td>3-5講座</td>
+                            <td><span class="badge badge-medium">中</span></td>
+                            <td><span class="badge badge-medium">高</span></td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>メンタルヘルス・セルフケア</strong></td>
+                            <td>0講座</td>
+                            <td>5-7講座</td>
+                            <td><span class="badge badge-medium">大</span></td>
+                            <td><span class="badge badge-medium">高</span></td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>ハラスメント防止</strong></td>
+                            <td>5講座</td>
+                            <td>8-10講座</td>
+                            <td><span class="badge badge-medium">中</span></td>
+                            <td><span class="badge badge-medium">高</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>エンゲージメント向上</strong></td>
+                            <td>0講座</td>
+                            <td>3-4講座</td>
+                            <td><span class="badge badge-medium">中</span></td>
+                            <td><span class="badge badge-low">中</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>ライティング・文書作成スキル</strong></td>
+                            <td>1講座</td>
+                            <td>4-5講座</td>
+                            <td><span class="badge badge-medium">中</span></td>
+                            <td><span class="badge badge-low">中</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>財務・会計（深化版）</strong></td>
+                            <td>1講座</td>
+                            <td>4-5講座</td>
+                            <td><span class="badge badge-medium">中</span></td>
+                            <td><span class="badge badge-low">中</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>人事・採用支援</strong></td>
+                            <td>0講座</td>
+                            <td>3-4講座</td>
+                            <td><span class="badge badge-medium">中</span></td>
+                            <td><span class="badge badge-low">中</span></td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>PC実務スキル（派遣のミカタ対策）</strong></td>
+                            <td>40講座</td>
+                            <td>48-50講座</td>
+                            <td><span class="badge badge-medium">中</span></td>
+                            <td><span class="badge badge-medium">高</span></td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>法務・労務・経理（派遣のミカタ対策）</strong></td>
+                            <td>5講座</td>
+                            <td>15-17講座</td>
+                            <td><span class="badge badge-medium">大</span></td>
+                            <td><span class="badge badge-medium">高</span></td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>コールセンター専門</strong></td>
+                            <td>0講座</td>
+                            <td>4-5講座</td>
+                            <td><span class="badge badge-medium">中</span></td>
+                            <td><span class="badge badge-medium">中</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>上位資格対策（診断士・社労士）</strong></td>
+                            <td>0講座</td>
+                            <td>2-3講座</td>
+                            <td><span class="badge badge-low">小</span></td>
+                            <td><span class="badge badge-low">低</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ 派遣のミカタとの競合分析から判明した不足領域</strong><br><br>
+                派遣のミカタは、Cross Learningと同じ「派遣スタッフ市場」を狙っており、<br>
+                特に「製造・物流・介護」で競合関係にあります。<br><br>
+                <strong>【派遣のミカタの強み = Cross Learningの弱み】</strong><br>
+                ❌ PC実務スキル（Excel VBA・マクロ・Access等）が不足<br>
+                ❌ 法務・労務・経理実務（労働法・派遣法・簿記等）が不足<br>
+                ❌ コールセンター専門講座が皆無<br><br>
+                → <strong>Phase 2で計18-22講座を追加し、派遣市場での競争力を強化</strong>
+            </div>
+
+            <h3>3-2. 外国人向け講座の充足状況</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>領域</th>
+                            <th>現行</th>
+                            <th>拡充後</th>
+                            <th>状態</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #e8f5e9;">
+                            <td><strong>生活・職場文化教育</strong></td>
+                            <td>0講座</td>
+                            <td>30講座</td>
+                            <td><span class="badge badge-excellent">完全解決</span></td>
+                        </tr>
+                        <tr style="background: #e8f5e9;">
+                            <td><strong>多言語対応（4言語追加）</strong></td>
+                            <td>72講座</td>
+                            <td>200講座</td>
+                            <td><span class="badge badge-excellent">大幅改善（42.4%）</span></td>
+                        </tr>
+                        <tr style="background: #e8f5e9;">
+                            <td><strong>安全衛生教育（多言語含む）</strong></td>
+                            <td>4講座</td>
+                            <td>28講座</td>
+                            <td><span class="badge badge-excellent">7倍改善</span></td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>業種別日本語講座</strong></td>
+                            <td>1講座</td>
+                            <td>1講座</td>
+                            <td><span class="badge badge-medium">要開発</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>3-3. 競合比較：インソース・派遣のミカタ vs Cross Learning</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>項目</th>
+                            <th>インソース</th>
+                            <th>派遣のミカタ</th>
+                            <th>Cross Learning（現行）</th>
+                            <th>評価</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>講座総数</strong></td>
+                            <td>4,401種類</td>
+                            <td>不明</td>
+                            <td>338 → <strong>616講座</strong></td>
+                            <td><span class="badge badge-medium">中規模で差別化</span></td>
+                        </tr>
+                        <tr style="background: #e8f5e9;">
+                            <td><strong>多言語対応</strong></td>
+                            <td>日本語中心</td>
+                            <td>日本語のみ</td>
+                            <td>8言語（42.4%）</td>
+                            <td><span class="badge badge-excellent">圧倒的優位</span></td>
+                        </tr>
+                        <tr style="background: #e8f5e9;">
+                            <td><strong>外国人材教育</strong></td>
+                            <td>情報なし</td>
+                            <td>なし</td>
+                            <td>スタートアップ30講座</td>
+                            <td><span class="badge badge-excellent">独占的優位</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>DX・生成AI</strong></td>
+                            <td>充実</td>
+                            <td>RPA基礎のみ</td>
+                            <td>0 → Phase 2で<strong>16-21講座</strong></td>
+                            <td><span class="badge badge-medium">Phase 2で追いつく</span></td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>PC実務スキル</strong></td>
+                            <td>標準的</td>
+                            <td><strong>非常に充実</strong><br>（Excel VBA・Access等）</td>
+                            <td>40講座 → <strong>+8-10講座</strong></td>
+                            <td><span class="badge badge-medium">Phase 2で補強</span></td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>法務・労務・経理</strong></td>
+                            <td>充実</td>
+                            <td><strong>派遣実務に特化</strong><br>（労働法・派遣法等）</td>
+                            <td>5講座 → <strong>+10-12講座</strong></td>
+                            <td><span class="badge badge-medium">Phase 2で補強</span></td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>コールセンター</strong></td>
+                            <td>標準的</td>
+                            <td><strong>専門カテゴリ</strong></td>
+                            <td>0 → Phase 3で<strong>4-5講座</strong></td>
+                            <td><span class="badge badge-low">Phase 3で追加</span></td>
+                        </tr>
+                        <tr style="background: #e8f5e9;">
+                            <td><strong>製造・現場特化</strong></td>
+                            <td>標準的</td>
+                            <td>製造・物流に強み</td>
+                            <td>58講座（17.2%）</td>
+                            <td><span class="badge badge-excellent">優位維持</span></td>
+                        </tr>
+                        <tr style="background: #e8f5e9;">
+                            <td><strong>介護福祉</strong></td>
+                            <td>標準的</td>
+                            <td>介護に強み</td>
+                            <td>16講座（4.7%）</td>
+                            <td><span class="badge badge-excellent">優位維持</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>ターゲット市場</strong></td>
+                            <td>企業全般・<br>ホワイトカラー</td>
+                            <td><strong>派遣スタッフ</strong><br>（製造・物流・事務）</td>
+                            <td><strong>外国人派遣スタッフ</strong><br>（製造・物流・介護）</td>
+                            <td><span class="badge badge-excellent">ニッチ特化</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>提供形式</strong></td>
+                            <td>講師派遣型中心</td>
+                            <td>eラーニング</td>
+                            <td>完全オンライン</td>
+                            <td><span class="badge badge-excellent">低コスト優位</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>💡 3社競合分析からの戦略的結論</strong><br><br>
+
+                <strong>【Cross Learningの独占的優位性】</strong><br>
+                ✅ <strong>外国人材教育×多言語対応（8言語、42.4%）</strong> → インソース・派遣のミカタともに未対応<br>
+                ✅ <strong>スタートアップ教育30講座</strong> → 業界初のWhy-basedアプローチ<br>
+                ✅ <strong>製造・介護特化</strong> → 競合より深い専門性<br><br>
+
+                <strong>【Phase 2で補完すべき領域（派遣のミカタから学ぶ）】</strong><br>
+                ⚠️ <strong>PC実務スキル</strong>（Excel VBA、マクロ、Access等）：+8-10講座<br>
+                ⚠️ <strong>法務・労務・経理実務</strong>（労働基準法、派遣法、簿記会計等）：+10-12講座<br>
+                ⚠️ <strong>DX・生成AI</strong>（インソースから）：+16-21講座<br>
+                ⚠️ <strong>マーケティング・財務</strong>（インソースから）：+16-20講座<br><br>
+
+                <strong>【Phase 3で補完すべき領域】</strong><br>
+                ⚠️ <strong>コールセンター専門</strong>（派遣のミカタから）：+4-5講座<br><br>
+
+                <strong>【最終戦略】</strong><br>
+                <strong>「垂直統合型（外国人材特化）× 水平展開（派遣スタッフ実務対応）× 上位展開（DX・戦略）」の三位一体</strong><br>
+                → Phase 1（2026年3月末）で472講座、Phase 2・3（2026年9月末）で616講座体制<br>
+                → 派遣市場での圧倒的No.1を確立
+            </div>
+
+            <h3>3-4. 業界別カバレッジ分析</h3>
+            <div class="card-grid">
+                <div class="card" style="border-left-color: #27ae60;">
+                    <h4>✅ 充実している業界</h4>
+                    <p>
+                        <strong>製造業</strong>: 58講座（17.2%）<br>
+                        → ものづくり、品質管理、現場リーダー教育が網羅的<br><br>
+                        <strong>IT/Web</strong>: 49講座（14.5%）<br>
+                        → HTML、CSS、JavaScript、サーバ、ネットワーク<br><br>
+                        <strong>介護福祉</strong>: 16講座（4.7%）<br>
+                        → 接遇、認知症、感染症、リスク管理
+                    </p>
+                </div>
+                <div class="card" style="border-left-color: #e74c3c;">
+                    <h4>⚠️ 不足している業界</h4>
+                    <p>
+                        <strong>建設業</strong>: 0講座<br>
+                        → 安全管理、施工管理、資格対策が必要<br><br>
+                        <strong>小売・サービス業</strong>: 4講座のみ<br>
+                        → 接客、販売、店舗運営が不足<br><br>
+                        <strong>飲食業</strong>: 実質0講座<br>
+                        → 衛生管理、調理技術、接客が必要
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第4部：戦略的提言 -->
+        <section id="section4">
+            <h2>💡 第4部：戦略的提言と実行計画</h2>
+
+            <h3>4-1. 中期的拡充計画（Phase 2）</h3>
+            <p style="font-size: 1.1em; margin-bottom: 30px;">
+                今回の110講座拡充（Phase 1）に続き、中期的（12-24ヶ月）に開発すべき講座群を提案します。
+            </p>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>優先度</th>
+                            <th>講座名</th>
+                            <th>想定講座数</th>
+                            <th>理由</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #ffebee;">
+                            <td><span class="badge badge-high">最優先</span></td>
+                            <td><strong>新入社員フォローアップシリーズ</strong><br>（3ヶ月・6ヶ月・1年）</td>
+                            <td>3-4講座</td>
+                            <td>早期離職防止に直結。現状0講座は致命的な欠如</td>
+                        </tr>
+                        <tr style="background: #ffebee;">
+                            <td><span class="badge badge-high">最優先</span></td>
+                            <td><strong>データ分析入門シリーズ</strong><br>（Excel統計・Python・Tableau・SQL）</td>
+                            <td>5-7講座</td>
+                            <td>DX推進の基盤。データサイエンス人材育成</td>
+                        </tr>
+                        <tr style="background: #ffebee;">
+                            <td><span class="badge badge-high">最優先</span></td>
+                            <td><strong>生成AI活用実践講座</strong><br>（ChatGPT・Copilot・業務効率化）</td>
+                            <td>3-5講座</td>
+                            <td>最新DXトレンド。全社員が必須で学ぶべき領域</td>
+                        </tr>
+                        <tr style="background: #ffebee;">
+                            <td><span class="badge badge-high">最優先</span></td>
+                            <td><strong>マーケティング・企画力強化</strong><br>（市場調査・企画立案・プレゼン）</td>
+                            <td>5-6講座</td>
+                            <td>ホワイトカラーの必須スキル。現状0講座</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><span class="badge badge-medium">高</span></td>
+                            <td><strong>業務効率化ツール</strong><br>（RPA・Power Automate）</td>
+                            <td>3-4講座</td>
+                            <td>生産性向上の切り札</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><span class="badge badge-medium">高</span></td>
+                            <td><strong>キャリアデザイン</strong><br>（20代・30代・40代別）</td>
+                            <td>3講座</td>
+                            <td>キャリア自律促進。従業員定着率向上</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><span class="badge badge-medium">高</span></td>
+                            <td><strong>メンタルヘルス・セルフケア</strong><br>（ストレス管理・レジリエンス強化）</td>
+                            <td>5-7講座</td>
+                            <td>心の健康管理。離職防止・生産性向上に直結</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><span class="badge badge-medium">高</span></td>
+                            <td><strong>管理職強化シリーズ</strong><br>（評価・フィードバック・部下育成）</td>
+                            <td>5-7講座</td>
+                            <td>現行5講座では不足。マネジメント力強化</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><span class="badge badge-medium">高</span></td>
+                            <td><strong>ハラスメント防止強化</strong><br>（パワハラ・セクハラ・マタハラ）</td>
+                            <td>3-5講座</td>
+                            <td>法改正対応。リスク管理強化</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-medium">中</span></td>
+                            <td><strong>エンゲージメント向上</strong><br>（モチベーション・組織風土改善）</td>
+                            <td>3-4講座</td>
+                            <td>従業員満足度向上。定着率アップ</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-medium">中</span></td>
+                            <td><strong>ライティング・文書作成スキル</strong><br>（ビジネス文書・提案書・報告書）</td>
+                            <td>4-5講座</td>
+                            <td>インソース強みの領域。専門的な書くスキル</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-medium">中</span></td>
+                            <td><strong>財務・会計講座</strong><br>（財務諸表・管理会計・予算管理）</td>
+                            <td>4-5講座</td>
+                            <td>管理職・企画職の必須知識</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-medium">中</span></td>
+                            <td><strong>人事・採用支援</strong><br>（採用戦略・面接技法・人材育成）</td>
+                            <td>3-4講座</td>
+                            <td>人事部門・管理職向け戦略スキル</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><span class="badge badge-high">高</span></td>
+                            <td><strong>PC実務スキル強化</strong><br>（Excel VBA・マクロ・Access・Gmail活用）</td>
+                            <td>8-10講座</td>
+                            <td>派遣のミカタの強み。派遣スタッフの即戦力化</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><span class="badge badge-high">高</span></td>
+                            <td><strong>法務・労務・経理実務</strong><br>（労働基準法・派遣法・社会保険・簿記会計）</td>
+                            <td>10-12講座</td>
+                            <td>派遣のミカタの強み。派遣スタッフ必須知識</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-medium">中</span></td>
+                            <td><strong>スタートアップ講座の多言語展開</strong><br>（インドネシア・スペイン・タガログ・ミャンマー語）</td>
+                            <td>24講座</td>
+                            <td>新規4言語への展開。グローバル基盤強化</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-medium">中</span></td>
+                            <td><strong>コールセンター専門講座</strong><br>（業界知識・クレーム対応・ストレスマネジメント）</td>
+                            <td>4-5講座</td>
+                            <td>派遣のミカタの強み。事務職への展開</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-medium">中</span></td>
+                            <td><strong>業種別日本語講座</strong><br>（製造・介護・建設・飲食）</td>
+                            <td>4講座</td>
+                            <td>業界特化の実践的日本語教育</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-low">低</span></td>
+                            <td><strong>上位資格対策</strong><br>（中小企業診断士・社労士入門）</td>
+                            <td>2-3講座</td>
+                            <td>経営・人事専門家育成。ニッチ市場</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>4-2. ロードマップ（Phase 1 〜 Phase 3）</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>フェーズ</th>
+                            <th>期間</th>
+                            <th>施策</th>
+                            <th>追加講座数</th>
+                            <th>累計講座数</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #e8f5e9;">
+                            <td><strong>Phase 1</strong><br>（今回）</td>
+                            <td><strong>〜2026年3月末<br>（約4ヶ月）</strong></td>
+                            <td>
+                                • スタートアップ講座6講座開発<br>
+                                • スタートアップ講座多言語版24講座（4言語）<br>
+                                • 既存講座多言語翻訳104講座（4言語）<br>
+                                • 営業・マーケティング展開
+                            </td>
+                            <td>+134講座</td>
+                            <td><strong>472講座</strong></td>
+                        </tr>
+                        <tr style="background: #d4edda; font-weight: bold;">
+                            <td colspan="2"><strong>🎯 Phase 1目標達成</strong></td>
+                            <td><strong>2026年3月末完了</strong></td>
+                            <td><strong>+134講座</strong></td>
+                            <td style="font-size: 1.2em; color: #27ae60;"><strong>472講座</strong></td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>Phase 2</strong></td>
+                            <td><strong>2026年4月〜9月<br>（約6ヶ月）</strong></td>
+                            <td>
+                                • 新入社員フォローアップ（3-4講座）<br>
+                                • データ分析・生成AI・RPA（16-21講座）<br>
+                                • マーケティング・企画力（5-6講座）<br>
+                                • キャリアデザイン（3講座）<br>
+                                • メンタルヘルス・セルフケア（5-7講座）<br>
+                                • 管理職強化（5-7講座）<br>
+                                • ハラスメント防止（3-5講座）<br>
+                                • ライティング・財務・人事（11-14講座）<br>
+                                • PC実務スキル強化（Excel VBA・Access等）（8-10講座）<br>
+                                • 法務・労務・経理実務（労働法・簿記等）（10-12講座）
+                            </td>
+                            <td>+69-89講座</td>
+                            <td><strong>541-561講座</strong></td>
+                        </tr>
+                        <tr style="background: #e3f2fd;">
+                            <td><strong>Phase 3</strong></td>
+                            <td><strong>2026年4月〜9月<br>（Phase 2と並行）</strong></td>
+                            <td>
+                                • スタートアップ講座の新4言語展開（24講座）<br>
+                                • 業種別日本語講座（4講座）<br>
+                                • エンゲージメント向上（3-4講座）<br>
+                                • 建設・小売業界講座開発（10-15講座）<br>
+                                • コールセンター専門講座（4-5講座）<br>
+                                • 上位資格対策（診断士・社労士）（2-3講座）
+                            </td>
+                            <td>+47-55講座</td>
+                            <td><strong>588-616講座</strong></td>
+                        </tr>
+                        <tr style="background: #d4edda; font-weight: bold;">
+                            <td colspan="2"><strong>🎯 Phase 2・3目標達成</strong></td>
+                            <td><strong>2026年9月末完了</strong></td>
+                            <td><strong>+116-144講座</strong></td>
+                            <td style="font-size: 1.2em; color: #27ae60;"><strong>588-616講座</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>4-3. 競合優位性の確立</h3>
+            <div class="alert alert-success" style="font-size: 1.1em;">
+                <strong>🏆 3社競合分析に基づく競争優位性の確立</strong><br><br>
+
+                <strong>【量的優位性】</strong><br>
+                Phase 1完了（2026年3月末）: 472講座 → Phase 2・3完了（2026年9月末）: 588-616講座<br>
+                <strong>2026年9月末までに616講座体制</strong> → 派遣市場での圧倒的No.1<br><br>
+
+                <strong>【質的優位性（独占的）】</strong><br>
+                • <strong>外国人材教育×多言語対応（8言語、42.4%）</strong> → インソース・派遣のミカタともに未対応<br>
+                • <strong>スタートアップ教育30講座</strong> → 業界初のWhy-basedアプローチ<br>
+                • <strong>製造・介護特化</strong>（74講座） → 競合より深い専門性<br>
+                • 労働安全衛生法準拠（雇入れ時教育要件充足）<br>
+                • 完全オンライン特化（低コスト・高効率）<br><br>
+
+                <strong>【Phase 2で補完（インソースから学ぶ）】</strong><br>
+                ✅ DX・生成AI・RPA（16-21講座） → 最新DXトレンド対応<br>
+                ✅ マーケティング・企画力（5-6講座） → ホワイトカラー対応<br>
+                ✅ ライティング・財務・人事（11-14講座） → 専門スキル網羅<br>
+                ✅ メンタルヘルス・管理職強化（10-14講座） → 組織力強化<br><br>
+
+                <strong>【Phase 2で補完（派遣のミカタから学ぶ）】</strong><br>
+                ✅ PC実務スキル強化（8-10講座） → Excel VBA・Access等<br>
+                ✅ 法務・労務・経理実務（10-12講座） → 労働法・派遣法・簿記等<br><br>
+
+                <strong>【Phase 3で補完】</strong><br>
+                ✅ コールセンター専門（4-5講座） → 事務職への展開<br>
+                ✅ 上位資格対策（2-3講座） → 診断士・社労士<br><br>
+
+                <strong>【最終戦略】</strong><br>
+                <strong>「垂直統合型（外国人材特化）× 水平展開（派遣スタッフ実務）× 上位展開（DX・戦略）」の三位一体</strong><br>
+                → インソース（上位市場）・派遣のミカタ（同一市場）の両方から学び、<br>
+                <strong>外国人派遣スタッフ市場での圧倒的No.1プラットフォーム</strong>を確立
+            </div>
+        </section>
+
+        <!-- 総括 -->
+        <section id="section5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2 style="color: white; border-left-color: white;">📋 総括：戦略的意思決定への提言</h2>
+
+            <div style="background: rgba(255,255,255,0.1); padding: 40px; border-radius: 12px; margin: 30px 0;">
+                <h3 style="color: white; border: none; font-size: 1.6em; margin-bottom: 20px;">
+                    ✅ 2段階戦略（Phase 1: 2026/3末 → Phase 2・3: 2026/9末）は必ず実行すべき
+                </h3>
+
+                <div style="font-size: 1.15em; line-height: 2;">
+                    <strong>【理由1】インソース・派遣のミカタとの3社競合分析で明確化した独占的優位性</strong><br>
+                    • <strong>外国人材教育×多言語対応（8言語、42.4%）</strong> → 両社ともに未対応<br>
+                    • <strong>スタートアップ教育30講座（Why-based）</strong> → 業界初<br>
+                    • <strong>製造・介護特化74講座</strong> → 競合より深い専門性<br>
+                    → これらは他社が簡単に模倣できない圧倒的優位性<br><br>
+
+                    <strong>【理由2】2社から学び、弱点を完全補完</strong><br>
+                    <strong>インソースから：</strong>DX・生成AI、マーケティング、財務、メンタルヘルス（42-55講座）<br>
+                    <strong>派遣のミカタから：</strong>PC実務（VBA・Access）、法務・労務、コールセンター（22-27講座）<br>
+                    → Phase 2・3で計116-144講座を追加し、<strong>「外国人派遣スタッフ市場」の全ニーズをカバー</strong><br><br>
+
+                    <strong>【理由3】段階的展開の実現可能性</strong><br>
+                    準備と人員が揃っている前提で、計画的に展開：<br>
+                    • <strong>Phase 1（〜2026年3月末）</strong>：多言語翻訳134講座 → <strong>472講座体制</strong><br>
+                    &nbsp;&nbsp;→ 外国人材教育の基盤を確立<br><br>
+                    • <strong>Phase 2・3（2026年4月〜9月）</strong>：DX・派遣実務スキル116-144講座 → <strong>616講座体制</strong><br>
+                    &nbsp;&nbsp;→ 競合弱点を完全補完し、市場No.1を確立<br><br>
+
+                    <strong>【理由4】市場ポジショニングの完成】</strong><br>
+                    <strong>「垂直統合型（外国人材特化）× 水平展開（派遣スタッフ実務）× 上位展開（DX・戦略）」</strong><br>
+                    → インソース（上位市場）でもなく、派遣のミカタ（日本人派遣）でもない、<br>
+                    <strong>「外国人派遣スタッフ」という明確なニッチで圧倒的No.1</strong>を確立<br><br>
+
+                    <strong style="font-size: 1.3em; color: #ffd700;">
+                        2026年9月末までに本計画を完遂することで、<br>
+                        Cross Learningは外国人派遣スタッフ教育市場における<br>
+                        「唯一無二の統合プラットフォーム」としての地位を確立できます。
+                    </strong>
+                </div>
+            </div>
+
+            <div
+                style="text-align: center; margin-top: 60px; padding: 50px; background: rgba(255,255,255,0.95); color: #333; border-radius: 12px;">
+                <h3 style="color: #667eea; border: none; margin-bottom: 20px; font-size: 1.8em;">
+                    338講座 → 472講座 → 616講座へ
+                </h3>
+                <p style="font-size: 1.3em; margin: 20px 0; font-weight: bold; color: #667eea;">
+                    Cross Learning 講座ポートフォリオ完全分析報告書【最終版】
+                </p>
+                <p style="margin-top: 15px; opacity: 0.8; font-size: 1.1em;">
+                    統合CSVデータ（338講座）+ 拡充計画（278講座）<br>
+                    + インソース・派遣のミカタ 3社競合分析<br>
+                    <strong>🎯 Phase 1: 2026年3月末 → Phase 2・3: 2026年9月末</strong><br>
+                    Based on integrated data as of November 7, 2025
+                </p>
+            </div>
+        </section>
+
+        <footer style="background: #2c3e50; color: white; padding: 40px; text-align: center;">
+            <p style="font-size: 1.1em; margin-bottom: 10px;">&copy; 2025 Cross Learning 講座分析プロジェクト</p>
+            <p>本報告書は統合CSVデータ（338講座）+ 拡充計画（278講座）に基づく精密分析結果です</p>
+            <p style="margin-top: 10px;">インソース・派遣のミカタ 3社競合分析を含む</p>
+            <p style="margin-top: 10px; font-weight: bold; color: #27ae60;">🎯 Phase 1: 2026年3月末（472講座） → Phase 2・3:
+                2026年9月末（616講座）</p>
+            <p style="margin-top: 15px; font-weight: bold;">機密情報を含みます。無断転載・複製を禁じます。</p>
+        </footer>
+    </div>
+</body>
+
+</html>
