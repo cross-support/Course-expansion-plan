@@ -293,6 +293,46 @@
             }
         }
 
+        /* ダウンロードボタン */
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95em;
+            margin: 15px 10px 15px 0;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .download-btn:before {
+            content: "📥 ";
+            margin-right: 8px;
+        }
+
+        .download-section {
+            background: #f8f9fa;
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .download-section h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
         /* アラートボックス */
         .alert {
             padding: 25px;
@@ -500,6 +540,16 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+
+            <div class="download-section">
+                <h4>📊 Cross Learning 全講座データ（338講座）</h4>
+                <p style="color: #666; margin-bottom: 15px;">現行338講座の詳細情報をCSV形式でダウンロードできます</p>
+                <a href="https://raw.githubusercontent.com/cross-support/Course-expansion-plan/main/Cross_Learning_講座統合マスター.csv" 
+                   class="download-btn" 
+                   download="Cross_Learning_講座統合マスター.csv">
+                    Cross Learning講座一覧をダウンロード
+                </a>
             </div>
 
             <h3>1-2. 多言語対応状況（現行）</h3>
@@ -786,7 +836,7 @@
                 <strong>【派遣のミカタ（857講座）との比較分析】</strong><br><br>
                 派遣のミカタは同じ「派遣スタッフ市場」を対象に857講座を展開しています。<br>
                 Cross Learning（現行338講座）との差分分析により、以下の不足領域が判明：<br><br>
-                
+
                 <strong>【Cross Learningに完全に不足している領域】</strong><br>
                 • <strong>人事・労務・総務</strong>: 派遣のミカタ93講座 vs CL 0講座<br>
                 • <strong>法務・コンプライアンス</strong>: 派遣のミカタ78講座 vs CL 5講座<br>
@@ -794,13 +844,23 @@
                 • <strong>経理・財務・会計</strong>: 派遣のミカタ47講座 vs CL 1講座<br>
                 • <strong>営業・販売</strong>: 派遣のミカタ43講座 vs CL 0講座<br>
                 • <strong>コールセンター</strong>: 派遣のミカタ5講座 vs CL 0講座<br><br>
-                
+
                 <strong>【Cross Learningの優位領域】</strong><br>
                 • <strong>製造・ものづくり</strong>: CL 58講座 vs 派遣のミカタ37講座（+21講座差）<br>
                 • <strong>多言語対応</strong>: CL 8言語200講座（予定） vs 派遣のミカタ4言語102講座<br>
                 • <strong>外国人向けスタートアップ教育</strong>: CL 30講座 vs 派遣のミカタ 0講座<br><br>
-                
+
                 → <strong>Phase 2で計69-89講座を追加し、派遣市場での横展開を実現</strong>
+            </div>
+
+            <div class="download-section">
+                <h4>📊 派遣のミカタ 全講座データ（857講座）</h4>
+                <p style="color: #666; margin-bottom: 15px;">競合である派遣のミカタの857講座の詳細情報をCSV形式でダウンロードできます</p>
+                <a href="https://raw.githubusercontent.com/cross-support/Course-expansion-plan/main/haken_courselist.csv" 
+                   class="download-btn" 
+                   download="派遣のミカタ_講座一覧.csv">
+                    派遣のミカタ講座一覧をダウンロード
+                </a>
             </div>
 
             <h3>3-1. 中期的拡充計画（Phase 2）</h3>
