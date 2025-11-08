@@ -438,6 +438,34 @@
             }
         }
     </style>
+
+    <script>
+        // CSV文字化け防止：BOM付きでダウンロードする関数
+        function downloadCSVWithBOM(url, filename) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    // BOM（Byte Order Mark）を追加
+                    const BOM = '\uFEFF';
+                    const blob = new Blob([BOM + data], { type: 'text/csv;charset=utf-8;' });
+                    
+                    // ダウンロードリンクを作成
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = filename;
+                    link.click();
+                    
+                    // メモリ解放
+                    URL.revokeObjectURL(link.href);
+                })
+                .catch(error => {
+                    console.error('CSV download error:', error);
+                    alert('CSVのダウンロードに失敗しました。ブラウザで直接リンクを開いてください。');
+                });
+            
+            return false; // デフォルトのリンク動作を防止
+        }
+    </script>
 </head>
 
 <body>
@@ -544,10 +572,11 @@
 
             <div class="download-section">
                 <h4>📊 Cross Learning 全講座データ（338講座）</h4>
-                <p style="color: #666; margin-bottom: 15px;">現行338講座の詳細情報をCSV形式でダウンロードできます</p>
-                <a href="https://raw.githubusercontent.com/cross-support/Course-expansion-plan/main/Cross_Learning_講座統合マスター.csv" 
+                <p style="color: #666; margin-bottom: 15px;">現行338講座の詳細情報をCSV形式でダウンロードできます<br>
+                <small>※Windows Excelでも文字化けしません（BOM付きUTF-8）</small></p>
+                <a href="#" 
                    class="download-btn" 
-                   download="Cross_Learning_講座統合マスター.csv">
+                   onclick="downloadCSVWithBOM('https://raw.githubusercontent.com/cross-support/Course-expansion-plan/main/Cross_Learning_講座統合マスター.csv', 'Cross_Learning_講座統合マスター.csv'); return false;">
                     Cross Learning講座一覧をダウンロード
                 </a>
             </div>
@@ -855,10 +884,11 @@
 
             <div class="download-section">
                 <h4>📊 派遣のミカタ 全講座データ（857講座）</h4>
-                <p style="color: #666; margin-bottom: 15px;">競合である派遣のミカタの857講座の詳細情報をCSV形式でダウンロードできます</p>
-                <a href="https://raw.githubusercontent.com/cross-support/Course-expansion-plan/main/haken_courselist.csv" 
+                <p style="color: #666; margin-bottom: 15px;">競合である派遣のミカタの857講座の詳細情報をCSV形式でダウンロードできます<br>
+                <small>※Windows Excelでも文字化けしません（BOM付きUTF-8）</small></p>
+                <a href="#" 
                    class="download-btn" 
-                   download="派遣のミカタ_講座一覧.csv">
+                   onclick="downloadCSVWithBOM('https://raw.githubusercontent.com/cross-support/Course-expansion-plan/main/haken_courselist.csv', '派遣のミカタ_講座一覧.csv'); return false;">
                     派遣のミカタ講座一覧をダウンロード
                 </a>
             </div>
